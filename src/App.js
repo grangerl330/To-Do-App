@@ -8,10 +8,11 @@ import './App.css';
 
 class App extends Component {
   componentDidMount(){
-    // Calls the getCurrentUser() function when the component initially mounts when page loads
+    // Calls the getCurrentUser() function when the component initially mounts when page loads. This is an action creator imported from the actions folder
     this.props.getCurrentUser()
   }
 
+  // Renders what is actually seen on the webpage
   render() {
     return (
       <div className="App">
@@ -21,10 +22,13 @@ class App extends Component {
   }
 }
 
+// Maps the currentUser portion of the redux store to props so that the data is avaiable to use in this component
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser
   }
 }
 
+// Pass the mapStateToProps and mapDispatchToProps functions into connect for connection to the Redux store
+// `{ getCurrentUser }`  is ES6 shorthand for passing a mapDispatchToProps function into connect. The getCurrentUser function is imported from the /actions folder
 export default connect(mapStateToProps, { getCurrentUser })(App);
