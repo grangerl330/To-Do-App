@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+// Import all containers that will be displayed
+import LoginPage from './containers/LoginPage.js'
 // Imports action to fetch the currentUser from the database
-import { getCurrentUser } from './actions/currentUser'
+import { getCurrentUser } from './actions/user.js'
 // Imports connect function which allows for connection to the Redux store
 import { connect } from 'react-redux'
 // Imports css file for App
@@ -17,6 +19,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>To-Do App</h1>
+        <LoginPage />
       </div>
     );
   }
