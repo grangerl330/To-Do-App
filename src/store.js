@@ -2,14 +2,14 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 
 // Reducer File Imports
-import currentUser from './reducers/currentUser.js'
+import user from './reducers/user.js'
 
 // Redux Thunk is a middleware that lets you call action creators that return a function instead of an action object.
 import thunk from 'redux-thunk'
 
 // Combining all reducer files into one to be passed in to the createStore function
 const reducer = combineReducers({
-  currentUser
+  user
 })
 
 // Added composeEnhancer which allows us to use redux dev tools in console
