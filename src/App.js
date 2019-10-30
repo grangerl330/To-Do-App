@@ -21,7 +21,6 @@ class App extends Component {
     if(this.props.currentUser) {
       return (
         <div className="App">
-          <h1>To-Do App</h1>
           <MainPage currentUser={this.props.currentUser}/>
         </div>
       );
