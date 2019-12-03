@@ -13,6 +13,8 @@ function loadEventListeners() {
     // Add To Do Event
     form.addEventListener('submit', addToDo)
 
+    // Remove To Do Event
+    toDoList.addEventListener('click', removeToDo)
 }
 
 // Add To Do Function
@@ -44,4 +46,19 @@ function addToDo(event) {
 
     // Clear input
     toDoInput.value = ""
+}
+
+// Remove To Do Function
+function removeToDo(event) {
+    event.preventDefault()
+
+    // Check to see if the element being clicked is the delete icon
+    if (event.target.parentElement.classList.contains('delete-to-do')) {
+
+        // Confirm window pop-up before deleting
+        if (confirm("Are you sure?")) {
+            // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
+            event.target.parentElement.parentElement.remove()
+        }
+    }
 }
