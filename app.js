@@ -25,12 +25,11 @@ function loadEventListeners() {
 
 // Add To Do Function
 function addToDo(event) {
-    event.preventDefault()
+  event.preventDefault()
 
-    if(toDoInput.value === '') {
-        alert('You must enter a to do')
-    }
-
+  if(toDoInput.value === '') {
+      alert('You must enter a to do')
+  } else {
     // Create li element
     const li = document.createElement('li')
     // Add class
@@ -52,41 +51,48 @@ function addToDo(event) {
 
     // Clear input
     toDoInput.value = ""
+  }
 }
 
 // Remove To Do Function
 function removeToDo(event) {
-    event.preventDefault()
+  event.preventDefault()
 
-    // Check to see if the element being clicked is the delete icon
-    if (event.target.parentElement.classList.contains('delete-to-do')) {
+  // Check to see if the element being clicked is the delete icon
+  if (event.target.parentElement.classList.contains('delete-to-do')) {
 
-        // Confirm window pop-up before deleting
-        if (confirm("Are you sure?")) {
-            // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
-            event.target.parentElement.parentElement.remove()
-        }
-    }
+      // Confirm window pop-up before deleting
+      if (confirm("Are you sure?")) {
+          // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
+          event.target.parentElement.parentElement.remove()
+      }
+  }
 }
 
 // Clear To Dos Function
 function clearToDos() {
-    toDoList.innerHTML = ''
+  toDoList.innerHTML = ''
+
+  // Confirm window pop-up before deleting
+  if (confirm("Are you sure?")) {
+      // Clear all HTML from To Do List
+      toDoList.innerHTML = ''
+  }
 }
 
 // Filter To Dos Function
 function filterToDos(event) {
-    const text = event.target.value.toLowerCase()
+  const text = event.target.value.toLowerCase()
 
-    document.querySelectorAll('.list-group-item').forEach(function(toDo) {
-        const item = toDo.firstChild.textContent
+  document.querySelectorAll('.list-group-item').forEach(function(toDo) {
+      const item = toDo.firstChild.textContent
 
-        if(item.toLowerCase().indexOf(text) !== -1) {
-            toDo.classList.remove('d-none')
-            toDo.classList.add('d-flex')
-        } else {
-            toDo.classList.remove('d-flex')
-            toDo.classList.add('d-none')
-        }
-    })
+      if(item.toLowerCase().indexOf(text) !== -1) {
+          toDo.classList.remove('d-none')
+          toDo.classList.add('d-flex')
+      } else {
+          toDo.classList.remove('d-flex')
+          toDo.classList.add('d-none')
+      }
+  })
 }
