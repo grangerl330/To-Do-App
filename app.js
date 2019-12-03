@@ -18,6 +18,9 @@ function loadEventListeners() {
 
     // Clear To Dos Event
     clearButton.addEventListener('click', clearToDos)
+
+    // Filter To Dos Event
+    filter.addEventListener('keyup', filterToDos)
 }
 
 // Add To Do Function
@@ -69,4 +72,21 @@ function removeToDo(event) {
 // Clear To Dos Function
 function clearToDos() {
     toDoList.innerHTML = ''
+}
+
+// Filter To Dos Function
+function filterToDos(event) {
+    const text = event.target.value.toLowerCase()
+
+    document.querySelectorAll('.list-group-item').forEach(function(toDo) {
+        const item = toDo.firstChild.textContent
+
+        if(item.toLowerCase().indexOf(text) !== -1) {
+            toDo.classList.remove('d-none')
+            toDo.classList.add('d-flex')
+        } else {
+            toDo.classList.remove('d-flex')
+            toDo.classList.add('d-none')
+        }
+    })
 }
