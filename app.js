@@ -10,17 +10,17 @@ loadEventListeners()
 
 // Load Event Listeners Function
 function loadEventListeners() {
-    // Add To Do Event
-    form.addEventListener('submit', addToDo)
+  // Add To Do Event
+  form.addEventListener('submit', addToDo)
 
-    // Remove To Do Event
-    toDoList.addEventListener('click', removeToDo)
+  // Remove To Do Event
+  toDoList.addEventListener('click', removeToDo)
 
-    // Clear To Dos Event
-    clearButton.addEventListener('click', clearToDos)
+  // Clear To Dos Event
+  clearButton.addEventListener('click', clearToDos)
 
-    // Filter To Dos Event
-    filter.addEventListener('keyup', filterToDos)
+  // Filter To Dos Event
+  filter.addEventListener('keyup', filterToDos)
 }
 
 // Add To Do Function
@@ -82,17 +82,23 @@ function clearToDos() {
 
 // Filter To Dos Function
 function filterToDos(event) {
+  // Capture text from the filter input
   const text = event.target.value.toLowerCase()
 
+  // Loop through each To Do in the list
   document.querySelectorAll('.list-group-item').forEach(function(toDo) {
-      const item = toDo.firstChild.textContent
+    // Capture the text of the To Do list group item
+    const item = toDo.firstChild.textContent
 
-      if(item.toLowerCase().indexOf(text) !== -1) {
-          toDo.classList.remove('d-none')
-          toDo.classList.add('d-flex')
-      } else {
-          toDo.classList.remove('d-flex')
-          toDo.classList.add('d-none')
-      }
+    // If the To Do list group item does not contain the filter text, .indexOf() will return -1
+    if(item.toLowerCase().indexOf(text) !== -1) {
+      // Remove display none and add display flex to make the To Do show up
+      toDo.classList.remove('d-none')
+      toDo.classList.add('d-flex')
+    } else {
+      // Remove display flex and add display none to make the To Do be hidden
+      toDo.classList.remove('d-flex')
+      toDo.classList.add('d-none')
+    }
   })
 }
