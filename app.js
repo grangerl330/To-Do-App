@@ -15,6 +15,9 @@ function loadEventListeners() {
 
     // Remove To Do Event
     toDoList.addEventListener('click', removeToDo)
+
+    // Clear To Dos Event
+    clearButton.addEventListener('click', clearToDos)
 }
 
 // Add To Do Function
@@ -61,4 +64,9 @@ function removeToDo(event) {
             event.target.parentElement.parentElement.remove()
         }
     }
+}
+
+// Clear To Dos Function
+function clearToDos() {
+    toDoList.innerHTML = ''
 }
