@@ -1,6 +1,6 @@
 // Define UI Variables
 const form = document.querySelector('#to-do-form')
-const toDoList = document.querySelector('#to-do-collection')
+const toDoList = document.querySelector('#to-do-ul')
 const clearButton = document.querySelector('#clear-to-dos')
 const filter = document.querySelector('#filter')
 const toDoInput = document.querySelector('#to-do')
@@ -33,14 +33,32 @@ function addToDo(event) {
     // Create li element
     const li = document.createElement('li')
     // Add class
-    li.className = "list-group-item d-flex justify-content-between align-items-center"
-    // Create text node and append to li
-    li.appendChild(document.createTextNode(toDoInput.value))
+    li.className = "list-group-item d-flex align-items-center"
+
+    // Create checkbox input
+    const checkBox = document.createElement('input')
+    // Add class to checkBox
+    checkBox.className = ""
+    // Make input a checkbox
+    checkBox.setAttribute("type", "checkbox")
+    // Append checkbox to li
+    li.appendChild(checkBox)
+
+    // Create div for li text
+    const text = document.createElement('div')
+    // Add class to text div
+    text.className = "ml-3"
+    // Set text div's id
+    text.setAttribute("id", "to-do-text")
+    // Create a text node and append it to text div
+    text.appendChild(document.createTextNode(toDoInput.value))
+    // Append text div to li
+    li.appendChild(text)
 
     // Create new link element
     const link = document.createElement('a')
     // Add class
-    link.className = "badge delete-to-do"
+    link.className = "badge delete-to-do ml-auto"
     // Add icon HTML
     link.innerHTML = '<i class="fa fa-remove"></i>'
     // Append link to li
@@ -56,16 +74,14 @@ function addToDo(event) {
 
 // Remove To Do Function
 function removeToDo(event) {
-  event.preventDefault()
-
   // Check to see if the element being clicked is the delete icon
   if (event.target.parentElement.classList.contains('delete-to-do')) {
-
-      // Confirm window pop-up before deleting
-      if (confirm("Are you sure?")) {
-          // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
-          event.target.parentElement.parentElement.remove()
-      }
+    event.preventDefault()
+    // Confirm window pop-up before deleting
+    if (confirm("Are you sure?")) {
+      // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
+      event.target.parentElement.parentElement.remove()
+    }
   }
 }
 
@@ -75,8 +91,8 @@ function clearToDos() {
 
   // Confirm window pop-up before deleting
   if (confirm("Are you sure?")) {
-      // Clear all HTML from To Do List
-      toDoList.innerHTML = ''
+    // Clear all HTML from To Do List
+    toDoList.innerHTML = ''
   }
 }
 

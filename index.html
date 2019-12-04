@@ -19,18 +19,21 @@
       <div class="row justify-content-center mt-3">
         <div id="main" class="card w-75">
           <div class="card-body">
-            <h2 class="card-title mb-5">To Do List</h2>
+            <h2 class="card-title mb-4">To Do List</h2>
             <form id="to-do-form">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="to-do" id="to-do" placeholder="New To Do">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" type="text" name="to-do" id="to-do" placeholder="New To Do">
+                  <div class="input-group-append">
+                    <input class="btn btn-primary" type="submit" value="Add">
+                  </div>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Add To Do">
+              </div>
             </form>
           </div>
           <div class="card-body border-top">
-            <h2 class="card-title mb-4">To Dos</h2>
             <input class="form-control" type="text" name="filter" id="filter" placeholder="Filter To Dos">
-            <ul class="list-group my-4 pb-4 border-bottom" id="to-do-collection"></ul>
+            <ul class="list-group my-4 pb-4 border-bottom" id="to-do-ul"></ul>
             <a href="#" class="btn btn-dark" id="clear-to-dos">Clear To Dos</a>
           </div>
         </div>
