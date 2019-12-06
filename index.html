@@ -34,7 +34,28 @@
           <div class="card-body border-top">
             <input class="form-control" type="text" name="filter" id="filter" placeholder="Filter To Dos">
             <ul class="list-group my-4 pb-4 border-bottom" id="to-do-ul"></ul>
-            <a href="#" class="btn btn-dark" id="clear-to-dos">Clear To Dos</a>
+            <button class="btn btn-dark" id="clear-to-dos" data-toggle="modal" data-target="#confirmationModal">Clear To Dos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Clear All To Dos</h5>
+            <button class="close" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete the entire list?</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button class="btn btn-danger btn-block mr-4" data-dismiss="modal">No</button>
+            <button class="btn btn-success btn-block" data-dismiss="modal" id="confirm">Yes</button>
           </div>
         </div>
       </div>

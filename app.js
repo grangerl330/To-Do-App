@@ -1,9 +1,10 @@
 // Define UI Variables
 const form = document.querySelector('#to-do-form')
 const toDoList = document.querySelector('#to-do-ul')
-const clearButton = document.querySelector('#clear-to-dos')
+const confirmButton = document.querySelector('#confirm')
 const filter = document.querySelector('#filter')
 const toDoInput = document.querySelector('#to-do')
+const confirmationModal = $('#confirmationModal')
 
 // Load Event Listeners
 loadEventListeners()
@@ -19,8 +20,8 @@ function loadEventListeners() {
   // Remove To Do Event
   toDoList.addEventListener('click', removeToDo)
 
-  // Clear To Dos Event
-  clearButton.addEventListener('click', clearToDos)
+  // Clear All To Dos Event
+  confirmButton.addEventListener('click', clearToDos)
 
   // Filter To Dos Event
   filter.addEventListener('keyup', filterToDos)
@@ -155,14 +156,12 @@ function removeToDo(event) {
   // Check to see if the element being clicked is the delete icon
   if (event.target.parentElement.classList.contains('delete-to-do')) {
     event.preventDefault()
-    // Confirm window pop-up before deleting
-    if (confirm("Are you sure?")) {
-      // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
-      event.target.parentElement.parentElement.remove()
 
-      // Remove To Do from local storage
-      removeToDoFromLocalStorage(event.target.parentElement.parentElement)
-    }
+    // Remove the To Do li, which is the parent of the <a> tag which is the parent of the <i> delete icon
+    event.target.parentElement.parentElement.remove()
+
+    // Remove To Do from local storage
+    removeToDoFromLocalStorage(event.target.parentElement.parentElement)
   }
 }
 
@@ -193,16 +192,9 @@ function removeToDoFromLocalStorage(toDoItem) {
 function clearToDos() {
   toDoList.innerHTML = ''
 
-  // Confirm window pop-up before deleting
-  if (confirm("Are you sure?")) {
-    // Clear all HTML from To Do List
-    toDoList.innerHTML = ''
-  }
-
   // Clear all data from local storage
   localStorage.clear()
 }
-
 
 // Filter To Dos Function
 function filterToDos(event) {
