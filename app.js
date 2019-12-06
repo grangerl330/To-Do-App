@@ -85,8 +85,13 @@ function addToDo(event) {
   event.preventDefault()
 
   if(toDoInput.value === '') {
-      alert('You must enter a to do')
+    // Add invalid class for bootstrap invalid-feedback
+    if(!toDoInput.className.includes('is-invalid')) {
+      toDoInput.classList += " is-invalid"
+    }
   } else {
+    // Reset input class
+    toDoInput.className = "form-control"
     // Create li element
     const li = document.createElement('li')
     // Add class
