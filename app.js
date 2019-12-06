@@ -60,7 +60,7 @@ function addToDo(event) {
     // Add class
     link.className = "badge delete-to-do ml-auto"
     // Add icon HTML
-    link.innerHTML = '<i class="fa fa-remove"></i>'
+    link.innerHTML = '<i class="fa fa-remove fa-2x"></i>'
     // Append link to li
     li.appendChild(link)
 
@@ -104,8 +104,8 @@ function filterToDos(event) {
   // Loop through each To Do in the list
   document.querySelectorAll('.list-group-item').forEach(function(toDo) {
     // Capture the text of the To Do list group item
-    const item = toDo.firstChild.textContent
-
+    const item = toDo.children[1].textContent
+    
     // If the To Do list group item does not contain the filter text, .indexOf() will return -1
     if(item.toLowerCase().indexOf(text) !== -1) {
       // Remove display none and add display flex to make the To Do show up
