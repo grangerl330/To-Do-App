@@ -228,7 +228,7 @@ function filterToDos(event) {
   // Loop through each To Do in the list
   document.querySelectorAll('.list-group-item').forEach(function(toDo) {
     // Capture the text of the To Do list group item
-    const item = toDo.children[1].textContent
+    const item = toDo.firstChild.textContent
 
     // If the To Do list group item does not contain the filter text, .indexOf() will return -1
     if(item.toLowerCase().indexOf(text) !== -1) {
