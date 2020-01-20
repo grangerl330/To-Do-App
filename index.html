@@ -12,6 +12,9 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
     <title>To Do App</title>
   </head>
   <body>
@@ -24,7 +27,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <input class="form-control" type="text" name="to-do" id="to-do" placeholder="New To Do">
-                  <div class="invalid-feedback order-last">Please enter a to do</div>
+                  <div class="invalid-feedback order-last">Please enter some text</div>
                   <div class="input-group-append">
                     <input class="btn btn-primary" type="submit" value="Add">
                   </div>
@@ -33,7 +36,7 @@
             </form>
           </div>
           <div class="card-body border-top">
-            <input class="form-control" type="text" name="filter" id="filter" placeholder="Filter To Dos">
+            <input class="form-control" type="text" name="filter" id="filter" placeholder="Filter by keyword">
             <ul class="list-group my-4 pb-4 border-bottom" id="to-do-ul"></ul>
             <button class="btn btn-dark" id="clear-to-dos" data-toggle="modal" data-target="#confirmationModal">Clear To Dos</button>
           </div>

@@ -17,8 +17,8 @@ function loadEventListeners() {
   // Add To Do Event
   form.addEventListener('submit', addToDo)
 
-  // Remove To Do Event
-  toDoList.addEventListener('click', removeToDo)
+  // Click To Do Event
+  toDoList.addEventListener('click', clickToDo)
 
   // Clear All To Dos Event
   confirmButton.addEventListener('click', clearToDos)
@@ -46,25 +46,12 @@ function getToDos() {
     // Add class
     li.className = "list-group-item d-flex align-items-center"
 
-    // Create checkbox input
-    const checkBox = document.createElement('input')
-    // Add class to checkBox
-    checkBox.className = ""
-    // Make input a checkbox
-    checkBox.setAttribute("type", "checkbox")
-    // Append checkbox to li
-    li.appendChild(checkBox)
-
-    // Create div for li text
-    const text = document.createElement('div')
-    // Add class to text div
-    text.className = "ml-3"
-    // Set text div's id
-    text.setAttribute("id", "to-do-text")
-    // Create a text node and append it to text div
-    text.appendChild(document.createTextNode(toDo))
-    // Append text div to li
-    li.appendChild(text)
+    // Create an HTML doc from To Do string retrieved from localStorage
+    const doc = new DOMParser().parseFromString(toDo, "text/html")
+    // Select the To Do div from the doc
+    const toDoDiv = doc.querySelector(".ml-3")
+    // Append the div to the li
+    li.appendChild(toDoDiv)
 
     // Create new link element
     const link = document.createElement('a')
@@ -97,21 +84,14 @@ function addToDo(event) {
     // Add class
     li.className = "list-group-item d-flex align-items-center"
 
-    // Create checkbox input
-    const checkBox = document.createElement('input')
-    // Add class to checkBox
-    checkBox.className = ""
-    // Make input a checkbox
-    checkBox.setAttribute("type", "checkbox")
-    // Append checkbox to li
-    li.appendChild(checkBox)
-
     // Create div for li text
     const text = document.createElement('div')
     // Add class to text div
-    text.className = "ml-3"
+    text.className = "ml-3 to-do no-line"
+
     // Set text div's id
-    text.setAttribute("id", "to-do-text")
+    // text.setAttribute("id", length + 1)
+
     // Create a text node and append it to text div
     text.appendChild(document.createTextNode(toDoInput.value))
     // Append text div to li
@@ -130,7 +110,7 @@ function addToDo(event) {
     toDoList.appendChild(li)
 
     // Store in Local Storage
-    storeToDoInLocalStorage(toDoInput.value)
+    storeToDoInLocalStorage(text)
 
     // Clear input
     toDoInput.value = ""
@@ -150,14 +130,14 @@ function storeToDoInLocalStorage(toDo) {
   }
 
   // Add new toDo to the object
-  toDos.push(toDo)
+  toDos.push(toDo.outerHTML)
 
   // Store the object with the new toDo back into local storage as a string
   localStorage.setItem('toDos', JSON.stringify(toDos))
 }
 
-// Remove To Do Function
-function removeToDo(event) {
+// Click To Do Function
+function clickToDo(event) {
   // Check to see if the element being clicked is the delete icon
   if (event.target.parentElement.classList.contains('delete-to-do')) {
     event.preventDefault()
@@ -167,7 +147,46 @@ function removeToDo(event) {
 
     // Remove To Do from local storage
     removeToDoFromLocalStorage(event.target.parentElement.parentElement)
+
+    // Check if the element being clicked is the To Do text and is currently crossed out
+  } else if(event.target.classList.contains("line-through")) {
+      let toDo = event.target
+      // Remove the class that crosses out the To Do
+      toDo.classList.remove("line-through")
+      // Add class that tells us the To Do is not crossed out
+      toDo.classList.add("no-line")
+      // Update the To Do in local storage so it will remain not crossed out on a page refresh
+      updateToDo(toDo, event.target)
+
+    // Check if the element being clicked is the To Do text and is currently not crossed out
+  } else if (event.target.classList.contains("no-line")) {
+      let toDo = event.target
+      // Remove the class telling us the To Do is not crossed out
+      toDo.classList.remove("no-line")
+      // Add class that crosses out the To Do
+      toDo.classList.add("line-through")
+      // Update the To Do in local storage so it will remain crossed out on a page refresh
+      updateToDo(toDo, event.target)
   }
+}
+
+// Update To Do in local storage function
+function updateToDo(toDo, eventTarget) {
+  // Get To Dos array from local storage
+  let storedToDos = JSON.parse(localStorage.getItem('toDos'))
+
+  // Store the To Do that is going to be updated in local storage
+  let toDoBeingUpdated = storedToDos.find(toDo => toDo.includes(eventTarget.innerHTML))
+  // Get index of to do being updated
+  let index = storedToDos.indexOf(toDoBeingUpdated)
+
+  // Replace the To Do being updated with the new To Do - This keeps the To Dos in the same order after being updated
+  if (index !== -1) {
+    storedToDos[index] = toDo.outerHTML;
+  }
+
+  // Save the updated array back into local storage
+  localStorage.setItem('toDos', JSON.stringify(storedToDos))
 }
 
 // Remove from local storage function
@@ -184,7 +203,7 @@ function removeToDoFromLocalStorage(toDoItem) {
 
   // Iterate through the object and remove the toDo that matches the toDoItem passed in as an argument
   toDos.forEach(function(toDo, index) {
-    if(toDoItem.textContent === toDo){
+    if(toDo.includes(toDoItem.textContent)){
       toDos.splice(index, 1)
     }
   })
