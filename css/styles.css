@@ -1,3 +1,7 @@
+body {
+  background: #007bff;
+}
+
 .line-through {
   text-decoration: line-through;
 }
