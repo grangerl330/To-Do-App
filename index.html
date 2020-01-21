@@ -20,25 +20,37 @@
   <body>
     <div class="container">
       <div class="row justify-content-center mt-5">
-        <div id="main" class="card w-75">
-          <div class="card-body">
-            <h2 class="card-title mb-4">To Do List</h2>
-            <form id="to-do-form">
-              <div class="form-group">
-                <div class="input-group">
-                  <input class="form-control" type="text" name="to-do" id="to-do" placeholder="New To Do">
-                  <div class="invalid-feedback order-last">Please enter some text</div>
-                  <div class="input-group-append">
-                    <input class="btn btn-primary" type="submit" value="Add">
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+        <div class="col-6 p-2 list-title text-center">
+          <h2 class="m-0">To Do List</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-5">
+        <div id="main" class="card w-50 list-card">
           <div class="card-body border-top">
             <input class="form-control" type="text" name="filter" id="filter" placeholder="Filter by keyword">
-            <ul class="list-group my-4 pb-4 border-bottom" id="to-do-ul"></ul>
-            <button class="btn btn-dark" id="clear-to-dos" data-toggle="modal" data-target="#confirmationModal">Clear To Dos</button>
+            <ul class="list-group mt-3" id="to-do-ul"></ul>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <form id="to-do-form">
+                  <div class="form-group mb-5">
+                    <div class="input-group">
+                      <input class="form-control" type="text" name="to-do" id="to-do" placeholder="New Task">
+                      <div class="invalid-feedback order-last">Please enter some text</div>
+                      <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" value="Add">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-5">
+                <button class="btn clear-btn w-100" id="clear-to-dos" data-toggle="modal" data-target="#confirmationModal">Clear All Tasks</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +61,7 @@
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header bg-danger text-white">
-            <h5 class="modal-title">Clear All To Dos</h5>
+            <h5 class="modal-title">Clear All Tasks</h5>
             <button class="close" data-dismiss="modal">
               <i class="fa fa-times"></i>
             </button>
@@ -59,7 +71,7 @@
           </div>
           <div class="modal-footer justify-content-center">
             <button class="btn btn-danger btn-block mr-4" data-dismiss="modal">No</button>
-            <button class="btn btn-success btn-block" data-dismiss="modal" id="confirm">Yes</button>
+            <button class="btn btn-success btn-block my-0" data-dismiss="modal" id="confirm">Yes</button>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ function getToDos() {
     // Create li element
     const li = document.createElement('li')
     // Add class
-    li.className = "list-group-item d-flex align-items-center"
+    li.className = "d-flex align-items-center to-do-li"
 
     // Create an HTML doc from To Do string retrieved from localStorage
     const doc = new DOMParser().parseFromString(toDo, "text/html")
@@ -82,12 +82,12 @@ function addToDo(event) {
     // Create li element
     const li = document.createElement('li')
     // Add class
-    li.className = "list-group-item d-flex align-items-center"
+    li.className = "d-flex align-items-center to-do-li"
 
     // Create div for li text
     const text = document.createElement('div')
     // Add class to text div
-    text.className = "ml-3 to-do no-line"
+    text.className = "ml-3 no-line to-do-text"
 
     // Set text div's id
     // text.setAttribute("id", length + 1)
@@ -226,7 +226,7 @@ function filterToDos(event) {
   const text = event.target.value.toLowerCase()
 
   // Loop through each To Do in the list
-  document.querySelectorAll('.list-group-item').forEach(function(toDo) {
+  document.querySelectorAll('.to-do-li').forEach(function(toDo) {
     // Capture the text of the To Do list group item
     const item = toDo.firstChild.textContent
 
