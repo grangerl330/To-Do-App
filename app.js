@@ -9,6 +9,9 @@ const confirmationModal = $('#confirmationModal')
 // Load Event Listeners
 loadEventListeners()
 
+// Set Filter Visibility
+setFilterVisibility()
+
 // Load Event Listeners Function
 function loadEventListeners() {
   // DOM Load Event
@@ -115,6 +118,10 @@ function addToDo(event) {
     // Clear input
     toDoInput.value = ""
   }
+
+  if (JSON.parse(localStorage.getItem('toDos')).length >= 2) {
+    filter.style.display = '';
+  }
 }
 
 // Store To Do Function
@@ -147,6 +154,11 @@ function clickToDo(event) {
 
     // Remove To Do from local storage
     removeToDoFromLocalStorage(event.target.parentElement.parentElement)
+
+    // Hide filter input if To Do list length is under 2
+    if (JSON.parse(localStorage.getItem('toDos')).length < 2) {
+      filter.style.display = 'none';
+    }
 
     // Check if the element being clicked is the To Do text and is currently crossed out
   } else if(event.target.classList.contains("line-through")) {
@@ -218,6 +230,9 @@ function clearToDos() {
 
   // Clear all data from local storage
   localStorage.clear()
+
+  // Hide Filter
+  filter.style.display = 'none';
 }
 
 // Filter To Dos Function
@@ -241,4 +256,13 @@ function filterToDos(event) {
       toDo.classList.add('d-none')
     }
   })
+}
+
+// Set Filter Visibility Function
+function setFilterVisibility() {
+  if (JSON.parse(localStorage.getItem('toDos')) === null || JSON.parse(localStorage.getItem('toDos')).length < 2) {
+    filter.style.display = 'none';
+  } else {
+    filter.style.display = '';
+  }
 }
