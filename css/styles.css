@@ -9,7 +9,7 @@ body {
 
 .list-card {
   /* background-color: #abd3ff; */
-  box-shadow: 5px 10px 18px #00346b;
+  box-shadow: 5px 10px 18px rgba(58, 58, 59, 0.5);
 }
 
 .list-title {
